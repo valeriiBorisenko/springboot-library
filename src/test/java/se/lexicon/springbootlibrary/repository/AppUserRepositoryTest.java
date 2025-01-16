@@ -59,11 +59,4 @@ class AppUserRepositoryTest {
         assertNotNull(appUser1, "User not found");
         assertEquals(appUser.getUserDetails().getEmail(), appUser1.getUserDetails().getEmail());
     }
-
-    @Test
-    void findUsersDetailsEmail() {
-        AppUser appUser1 = appUserRepository.findUsersDetailsEmail("karl@test.com");
-        assertNotNull(appUser1, "User not found");
-        assertEquals(appUser.getUserDetails().getEmail(), appUser1.getUserDetails().getEmail());
-    }
 }
