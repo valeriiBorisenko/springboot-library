@@ -26,10 +26,10 @@ public class Details {
         this.birthDate = birthDate;
     }
 
-    public Details(LocalDate birthDate, String name, String email) {
-        this.birthDate = birthDate;
-        this.name = name;
+    public Details(String email, String name, LocalDate birthDate) {
         this.email = email;
+        this.name = name;
+        this.birthDate = birthDate;
     }
 
     public int getId() {
