@@ -1,6 +1,6 @@
 package se.lexicon.springbootlibrary.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import se.lexicon.springbootlibrary.entity.Details;
 
@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface DetailsRepository extends JpaRepository<Details, Integer> {
+public interface DetailsRepository extends CrudRepository<Details, Integer> {
     List<Details> findDetailsByEmail(String email);
     List<Details> findDetailsByNameContains(String name);
     List<Details> findDetailsByNameIgnoreCase(String name);

@@ -17,7 +17,7 @@ public class AppUser {
     private String password;
     private LocalDate regDate;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Details userDetails;
 
     protected AppUser() {}

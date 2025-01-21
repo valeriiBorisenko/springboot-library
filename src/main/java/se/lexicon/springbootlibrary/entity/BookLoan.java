@@ -17,7 +17,7 @@ public class BookLoan {
     @Column(nullable = false)
     private boolean returned;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private AppUser borrower;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
