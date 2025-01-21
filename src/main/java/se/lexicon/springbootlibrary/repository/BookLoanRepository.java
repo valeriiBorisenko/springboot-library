@@ -12,8 +12,9 @@ import java.util.List;
 
 @Repository
 public interface BookLoanRepository extends CrudRepository<BookLoan, Integer> {
-    List<BookLoan> findByBorrowerId(Integer id);
-    List<BookLoan> findByBookId(Integer id);
+    BookLoan findById(int id);
+    List<BookLoan> findByBorrowerId(int id);
+    List<BookLoan> findByBookId(int id);
     List<BookLoan> findByReturnedFalse();
 
     @Query("SELECT bl FROM BookLoan bl WHERE bl.returned = false AND bl.dueDate < CURRENT_DATE")
@@ -24,5 +25,5 @@ public interface BookLoanRepository extends CrudRepository<BookLoan, Integer> {
 
     @Modifying
     @Query("UPDATE BookLoan bl SET bl.returned = true WHERE bl.id = :loanId")
-    BookLoan markAsReturnedByLoanId(@Param("loanId") Integer loanId);
+    int markAsReturnedByLoanId(@Param("loanId") Integer loanId);
 }
