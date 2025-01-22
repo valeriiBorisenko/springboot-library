@@ -25,7 +25,9 @@ public class Book {
     @Column(nullable = false, name = "max_loan_days")
     private int maxLoanDays;
 
-    @ManyToMany(mappedBy = "writtenBooks")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToMany(mappedBy = "writtenBooks", fetch = FetchType.LAZY)
     private Set<Author> authors = new HashSet<>();
 
     public Book(String isbn, String title, int maxLoanDays) {

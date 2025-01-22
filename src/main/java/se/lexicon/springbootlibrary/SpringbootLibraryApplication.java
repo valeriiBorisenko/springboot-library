@@ -4,14 +4,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import se.lexicon.springbootlibrary.entity.AppUser;
-import se.lexicon.springbootlibrary.entity.Book;
-import se.lexicon.springbootlibrary.entity.BookLoan;
-import se.lexicon.springbootlibrary.entity.Details;
-import se.lexicon.springbootlibrary.repository.AppUserRepository;
-import se.lexicon.springbootlibrary.repository.BookLoanRepository;
-import se.lexicon.springbootlibrary.repository.BookRepository;
-import se.lexicon.springbootlibrary.repository.DetailsRepository;
+import se.lexicon.springbootlibrary.entity.*;
+import se.lexicon.springbootlibrary.repository.*;
 
 import java.time.LocalDate;
 
@@ -31,7 +25,13 @@ public class SpringbootLibraryApplication {
 	}
 
 	@Bean
-	CommandLineRunner runner(AppUserRepository appuserRepository, DetailsRepository detailsRepository, BookRepository bookRepository, BookLoanRepository bookLoanRepository) {
+	CommandLineRunner runner(
+			AppUserRepository appuserRepository,
+			DetailsRepository detailsRepository,
+			BookRepository bookRepository,
+			BookLoanRepository bookLoanRepository,
+			AuthorRepository authorRepository
+	) {
 		return args -> {
 
 			Details details = new Details("karlson@gmail.com", "Karlson Villy", LocalDate.of(1990, 1, 1));
@@ -41,6 +41,11 @@ public class SpringbootLibraryApplication {
 			BookLoan bookLoan = new BookLoan(LocalDate.now(), LocalDate.now().plusDays(10), false, appUser, book);
 			bookLoanRepository.save(bookLoan);
 
+			Author author = new Author("Karl", "Villy");
+			author.addBook(book);
+
+			authorRepository.save(author);
+
 			System.out.println("-------------------");
 			System.out.println("book loan saved: " + bookLoan);
 			System.out.println("-------------------");
@@ -49,6 +54,9 @@ public class SpringbootLibraryApplication {
 			System.out.println("Find books with max loan days less than 14: " + bookRepository.findByMaxLoanDaysLessThan(14));
 			System.out.println("-------------------");
 			System.out.println("Find overdue book loans: " + bookLoanRepository.findByReturnedFalse());
+			System.out.println("-------------------");
+			System.out.println(authorRepository.findByWrittenBooksId(book.getId()));
+			System.out.println("-------------------");
 
 		};
 	}

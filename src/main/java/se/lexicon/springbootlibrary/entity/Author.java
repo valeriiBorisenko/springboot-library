@@ -23,6 +23,8 @@ public class Author {
     @Column(nullable = false)
     private String lastName;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToMany
     @JoinTable(
             name = "author_book",
@@ -31,9 +33,18 @@ public class Author {
     )
     private Set<Book> writtenBooks = new HashSet<>();
 
-    public Author(String firstName, String lastName, Set<Book> writtenBooks) {
+    public Author(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.writtenBooks = writtenBooks;
+    }
+
+    public void addBook(Book book) {
+        writtenBooks.add(book);
+        book.getAuthors().add(this);
+    }
+
+    public void removeBook(Book book) {
+        writtenBooks.remove(book);
+        book.getAuthors().remove(this);
     }
 }
