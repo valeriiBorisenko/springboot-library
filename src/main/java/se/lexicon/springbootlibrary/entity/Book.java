@@ -3,6 +3,9 @@ package se.lexicon.springbootlibrary.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -22,6 +25,8 @@ public class Book {
     @Column(nullable = false, name = "max_loan_days")
     private int maxLoanDays;
 
+    @ManyToMany(mappedBy = "writtenBooks")
+    private Set<Author> authors = new HashSet<>();
 
     public Book(String isbn, String title, int maxLoanDays) {
         this.isbn = isbn;
