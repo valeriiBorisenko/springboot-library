@@ -35,4 +35,14 @@ public class Book {
         this.title = title;
         this.maxLoanDays = maxLoanDays;
     }
+
+    public void addAuthor(Author author) {
+        authors.add(author);
+        author.getWrittenBooks().add(this);
+    }
+
+    public void removeAuthor(Author author) {
+        authors.remove(author);
+        author.getWrittenBooks().remove(this);
+    }
 }
