@@ -38,5 +38,13 @@ public class AppUser {
         this.userDetails = userDetails;
     }
 
+    public void addBookLoan(BookLoan bookLoan) {
+        bookLoanList.add(bookLoan);
+        bookLoan.setBorrower(this);
+    }
 
+    public void removeBookLoan(BookLoan bookLoan) {
+        bookLoanList.remove(bookLoan);
+        bookLoan.setBorrower(null);
+    }
 }
