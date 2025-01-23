@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -27,10 +28,15 @@ public class AppUser {
     @OneToOne(cascade = CascadeType.ALL)
     private Details userDetails;
 
+    @OneToMany(mappedBy = "borrower")
+    private List<BookLoan> bookLoanList;
+
     public AppUser(String username, String password, LocalDate regDate, Details userDetails) {
         this.username = username;
         this.password = password;
         this.regDate = regDate;
         this.userDetails = userDetails;
     }
+
+
 }
